@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: taint
+spec:
+      containers:
+      - name: taint-demo
+        image: nginx
+      nodeSelector:
+              runapp: nope

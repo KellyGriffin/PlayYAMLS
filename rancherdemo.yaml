@@ -1,0 +1,82 @@
+﻿apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    field.cattle.io/creatorId: user-qkvpz
+    field.cattle.io/publicEndpoints: '[{"addresses":["54.252.235.254"],"port":30325,"protocol":"TCP","serviceName":"default:rancherdemo-nodeport","allNodes":true}]'
+  creationTimestamp: "2019-04-15T08:52:28Z"
+  generation: 3
+  labels:
+    cattle.io/creator: norman
+    workload.user.cattle.io/workloadselector: deployment-default-rancherdemo
+  name: rancherdemo
+  namespace: default
+  resourceVersion: "351653"
+  selfLink: /apis/apps/v1beta2/namespaces/default/deployments/rancherdemo
+  uid: cc40d5c3-5f5b-11e9-a0a8-02b3b9c414c0
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-default-rancherdemo
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2019-04-15T08:53:17Z"
+        field.cattle.io/ports: '[[{"containerPort":80,"dnsName":"rancherdemo-nodeport","kind":"NodePort","name":"80tcp01","protocol":"TCP","sourcePort":0}]]'
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-default-rancherdemo
+    spec:
+      containers:
+      - image: rancher/hello-world
+        imagePullPolicy: Always
+        name: rancherdemo
+        ports:
+        - containerPort: 80
+          name: 80tcp01
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          procMount: Default
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2019-04-15T08:53:25Z"
+    lastUpdateTime: "2019-04-15T08:53:25Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2019-04-15T08:52:28Z"
+    lastUpdateTime: "2019-04-15T08:53:25Z"
+    message: ReplicaSet "rancherdemo-596dc4f5c4" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 3
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

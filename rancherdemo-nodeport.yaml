@@ -1,0 +1,37 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"addresses":["54.252.235.254"],"port":30325,"protocol":"TCP","serviceName":"default:rancherdemo-nodeport","allNodes":true}]'
+    field.cattle.io/targetWorkloadIds: '["deployment:default:rancherdemo"]'
+    workload.cattle.io/targetWorkloadIdNoop: "true"
+    workload.cattle.io/workloadPortBased: "true"
+  creationTimestamp: "2019-04-15T08:52:28Z"
+  labels:
+    cattle.io/creator: norman
+  name: rancherdemo-nodeport
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1beta2
+    controller: true
+    kind: deployment
+    name: rancherdemo
+    uid: cc40d5c3-5f5b-11e9-a0a8-02b3b9c414c0
+  resourceVersion: "351518"
+  selfLink: /api/v1/namespaces/default/services/rancherdemo-nodeport
+  uid: cc44496f-5f5b-11e9-a0a8-02b3b9c414c0
+spec:
+  clusterIP: 10.43.106.174
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: 80tcp01
+    nodePort: 30325
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-default-rancherdemo
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
